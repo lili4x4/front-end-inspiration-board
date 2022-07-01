@@ -79,13 +79,11 @@ function App() {
   //which means its not getting the board info with the updated likes count
   const increaseLikes = (messageData) => {
     console.log({ cardData: messageData });
-    patchCard(messageData)
-      .then((patchResponse) => {
-        getOneBoard(patchResponse.card.boardId);
-      })
-      .then((boardResponse) => {
+    patchCard(messageData).then((patchResponse) => {
+      getOneBoard(patchResponse.card.boardId).then((boardResponse) => {
         setChosenBoard(boardResponse.board);
       });
+    });
   };
 
   useEffect(() => {
