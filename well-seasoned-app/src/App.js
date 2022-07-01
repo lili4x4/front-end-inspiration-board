@@ -20,19 +20,40 @@ const getBoards = () => {
 };
 
 // incomplete:
-const increaseLikes = (cardId) => {
-  return axios
-    .patch(`${kBaseUrl}/cards/${cardId}`, {likesData:})
-    .then((response) => {
-      return response.data;
-    })
-    .catch((err) => {
-      console.log(err);
-    });
+// {cardID: #,
+//  likesData: #}
+// const increaseLikes = (messageData) => {
+//   return axios
+//     .patch(`${kBaseUrl}/cards/${messageData.cardId}`, {
+//       likes_count: messageData.likesCount,
+//     })
+//     .then((response) => {
+//       return response.data;
+//     })
+//     .catch((err) => {
+//       console.log(err);
+//     });
+// };
+
+const blankBoard = {
+  board_id: 0,
+  owner: "",
+  title: "",
+  cards: [],
 };
 
 function App() {
   const [boardData, setBoardData] = useState([]);
+  const [chosenBoard, setChosenBoard] = useState(blankBoard);
+
+  const chooseBoard = (boardInfo) => {
+    const filteredData = boardData.filter((data) => {
+      return data.board_id === boardInfo.board_id;
+    });
+    const board = filteredData[0];
+    setChosenBoard(board);
+  };
+
   const updateBoards = () => {
     getBoards().then((boards) => {
       setBoardData(boards);
@@ -47,11 +68,13 @@ function App() {
     <div>
       <header>
         <h1>Well-Seasoned</h1>
-        <BoardDropdown />
+        <BoardDropdown boardData={boardData} chooseBoard={chooseBoard} />
       </header>
       <main>
         <NewCardForm />
-        <Board />
+        <Board
+          chosenBoardData={chosenBoard} /* increaseLikes={increaseLikes}*/
+        />
         <NewBoardForm />
       </main>
     </div>
