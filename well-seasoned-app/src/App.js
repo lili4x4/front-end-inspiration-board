@@ -35,6 +35,18 @@ const increaseLikes = (messageData) => {
     });
 };
 
+// Callback function that makes API call to create new board
+const createNewBoardCallback = (boardData) => {
+  return axios
+    .post(`${kBaseUrl}/boards`, boardData)
+    .then((response) => {
+      return response.data;
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};
+
 function App() {
   const [boardData, setBoardData] = useState([]);
   const [chosenBoard, setChosenBoard] = useState();
@@ -58,6 +70,16 @@ function App() {
     updateBoards();
   }, []);
 
+  const createNewBoard = (boardData) => {
+    createNewBoardCallback(boardData).then((newBoard) => {
+      setBoardData((oldData) => [...oldData, newBoard]);
+    });
+  };
+
+  const handleBoardDataReady = (formData) => {
+    createNewBoard(formData);
+  };
+
   return (
     <div>
       <header>
@@ -67,7 +89,7 @@ function App() {
       <main>
         <NewCardForm />
         <Board chosenBoardData={chosenBoard} increaseLikes={increaseLikes} />
-        <NewBoardForm />
+        <NewBoardForm onBoardDataReady={handleBoardDataReady} />
       </main>
     </div>
   );

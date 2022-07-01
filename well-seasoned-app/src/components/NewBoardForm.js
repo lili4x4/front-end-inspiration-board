@@ -1,8 +1,41 @@
-import React from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 
-const NewBoardForm = () => {
-  return <h4>New Board Form here</h4>;
+const kDefaultFormState = {
+  title: "",
+  owner: "",
+};
+
+const NewBoardForm = ({ onBoardDataReady }) => {
+  const [formData, setFormData] = useState(kDefaultFormState);
+
+  const handleChange = (event) => {
+    console.log(event.target.value);
+    const fieldName = event.target.name;
+    const fieldValue = event.target.value;
+
+    const newFormData = { ...formData, [fieldName]: fieldValue };
+    setFormData(newFormData);
+  };
+  return (
+    <div className="NewBoardForm">
+      <h3>Add a Board</h3>
+      <label>Board Title</label>
+      <input
+        type="text"
+        name="title"
+        value={formData.title}
+        onChange={handleChange}
+      ></input>
+      <label>Owner</label>
+      <input
+        type="text"
+        name="owner"
+        value={formData.owner}
+        onChange={handleChange}
+      ></input>
+    </div>
+  );
 };
 
 export default NewBoardForm;
