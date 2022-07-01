@@ -2,40 +2,36 @@ import React from "react";
 import PropTypes from "prop-types";
 import Card from "./Card";
 
-const Board = ({ chosenBoardData, increaseLikes }) => {
-  //shape of chosenBoardData
-  //{
-  //  board_id: #,
-  //  owner: string
-  //  title: string
-  //  cards: [
-  //    {
-  //    board_id: #
-  //    card_id: #
-  //    likes_count: #
-  //    message: string
-  //  },
-  //    ...
-  //  ]
-  // }
+const Board = ({ chosenBoardData /*increaseLikes*/ }) => {
+  const boardTitle =
+    chosenBoardData !== [] ? chosenBoardData.title : "Placeholder Board Title";
 
-  const messageData = chosenBoardData.cards.map((card) => {
-    return (
-      <Card
-        increaseLikesCard={increaseLikes}
-        key={card.card_id}
-        id={card.card_id}
-        boardId={card.board_id}
-        message={card.message}
-        likesCount={card.likes_count}
-      />
-    );
-  });
+  const messageData = (chosenBoardData) => {
+    if (chosenBoardData === []) {
+      return "";
+    } else {
+      const data = chosenBoardData.cards.map((card) => {
+        // console.log(card);
+        return (
+          <Card
+            key={card.card_id}
+            id={card.card_id}
+            boardId={card.board_id}
+            message={card.message}
+            likesCount={card.likes_count}
+          />
+        );
+      });
+      return data;
+    }
+  };
+
+  const messages = messageData(chosenBoardData);
 
   return (
     <div>
-      <h2>{chosenBoardData.title}</h2>
-      <ul>{messageData}</ul>
+      <h2>{boardTitle}</h2>
+      <ul>{messages}</ul>
     </div>
   );
 };
@@ -48,7 +44,7 @@ const cardObjectShape = {
 };
 
 Board.propTypes = {
-  increaseLikes: PropTypes.func.isRequired,
+  // increaseLikes: PropTypes.func.isRequired,
   chosenBoardData: PropTypes.shape({
     board_id: PropTypes.number,
     owner: PropTypes.string,
