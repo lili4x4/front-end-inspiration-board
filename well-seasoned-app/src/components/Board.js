@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import Card from "./Card";
 
-const Board = ({ chosenBoardData, increaseLikes }) => {
+const Board = ({ chosenBoardData /*increaseLikes*/ }) => {
   //shape of chosenBoardData
   //{
   //  board_id: #,
@@ -19,23 +19,34 @@ const Board = ({ chosenBoardData, increaseLikes }) => {
   //  ]
   // }
 
-  const messageData = chosenBoardData.cards.map((card) => {
-    return (
-      <Card
-        increaseLikesCard={increaseLikes}
-        key={card.card_id}
-        id={card.card_id}
-        boardId={card.board_id}
-        message={card.message}
-        likesCount={card.likes_count}
-      />
-    );
-  });
+  const boardTitle =
+    chosenBoardData !== [] ? chosenBoardData.title : "Placeholder Board Title";
+
+  const messageData = () => {
+    if (chosenBoardData === []) {
+      return "";
+    } else {
+      chosenBoardData.cards.map((card) => {
+        return (
+          <Card
+            // increaseLikesCard={increaseLikes}
+            key={card.card_id}
+            id={card.card_id}
+            boardId={card.board_id}
+            message={card.message}
+            likesCount={card.likes_count}
+          />
+        );
+      });
+    }
+  };
+
+  const messages = messageData(chosenBoardData);
 
   return (
     <div>
-      <h2>{chosenBoardData.title}</h2>
-      <ul>{messageData}</ul>
+      <h2>{boardTitle}</h2>
+      <ul>{messages}</ul>
     </div>
   );
 };

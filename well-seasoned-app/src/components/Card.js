@@ -1,7 +1,12 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-const Card = ({ cardId, message, likesCount, boardId, increaseLikesCard }) => {
+const Card = ({
+  cardId,
+  message,
+  likesCount,
+  boardId /*increaseLikesCard*/,
+}) => {
   const increaseLikes = () => {
     likesCount += 1;
     const newCard = {
@@ -10,7 +15,7 @@ const Card = ({ cardId, message, likesCount, boardId, increaseLikesCard }) => {
       likesCount,
       boardId,
     };
-    increaseLikesCard(newCard);
+    // increaseLikesCard(newCard);
   };
 
   return (
