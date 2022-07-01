@@ -19,11 +19,18 @@ const getBoards = () => {
     });
 };
 
-// messageData:
-// {cardID: #
-//  boardId: #,
-//  likesData: #,
-//  message: string}
+const getOneBoard = (boardId) => {
+  return axios
+    .get(`${kBaseUrl}/boards/${boardId}`)
+    .then((response) => {
+      console.log({ getOneBoard: response.data });
+      return response.data;
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};
+
 const patchCard = (messageData) => {
   const patchRequest = {
     card_id: messageData.cardId,
@@ -34,6 +41,7 @@ const patchCard = (messageData) => {
   return axios
     .patch(`${kBaseUrl}/cards/${messageData.cardId}`, patchRequest)
     .then((response) => {
+      console.log({ patchResponseData: response.data });
       return response.data;
     })
     .catch((err) => {
@@ -52,10 +60,6 @@ function App() {
   const [boardData, setBoardData] = useState([]);
   const [chosenBoard, setChosenBoard] = useState(blankBoard);
 
-  useEffect(() => {
-    updateBoards();
-  }, []);
-
   const chooseBoard = (boardInfo) => {
     const filteredData = boardData.filter((data) => {
       return data.board_id === boardInfo.board_id;
@@ -70,9 +74,23 @@ function App() {
     });
   };
 
+  //something about the asynchronity is not working here
+  //my getOneBoard function is firing before it has the patch response data
+  //which means its not getting the board info with the updated likes count
   const increaseLikes = (messageData) => {
-    patchCard(messageData).then(updateBoards());
+    console.log({ cardData: messageData });
+    patchCard(messageData)
+      .then((patchResponse) => {
+        getOneBoard(patchResponse.card.boardId);
+      })
+      .then((boardResponse) => {
+        setChosenBoard(boardResponse.board);
+      });
   };
+
+  useEffect(() => {
+    updateBoards();
+  }, []);
 
   return (
     <div>

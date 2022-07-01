@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import Card from "./Card";
 
-const Board = ({ chosenBoardData /*increaseLikes*/ }) => {
+const Board = ({ chosenBoardData, increaseLikes }) => {
   const boardTitle =
     chosenBoardData !== [] ? chosenBoardData.title : "Placeholder Board Title";
 
@@ -15,10 +15,11 @@ const Board = ({ chosenBoardData /*increaseLikes*/ }) => {
         return (
           <Card
             key={card.card_id}
-            id={card.card_id}
+            cardId={card.card_id}
             boardId={card.board_id}
             message={card.message}
             likesCount={card.likes_count}
+            increaseLikesCard={increaseLikes}
           />
         );
       });
@@ -44,7 +45,7 @@ const cardObjectShape = {
 };
 
 Board.propTypes = {
-  // increaseLikes: PropTypes.func.isRequired,
+  increaseLikes: PropTypes.func.isRequired,
   chosenBoardData: PropTypes.shape({
     board_id: PropTypes.number,
     owner: PropTypes.string,
