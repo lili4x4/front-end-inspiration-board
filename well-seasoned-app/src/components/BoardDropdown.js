@@ -2,23 +2,24 @@ import React from "react";
 import PropTypes from "prop-types";
 
 const BoardDropdown = ({ boardData, chooseBoard }) => {
-  //use map function to get separate list of just board titles? use that for info for dropdown?
-
   const dropdownOptions = boardData.map((board) => {
+    // console.log(board);
     return (
-      <option key={board.board_id} id={board.board_id} value={board}>
+      <option
+        key={board.board_id}
+        id={board.board_id}
+        value={JSON.stringify(board)}
+      >
         {board.title}
       </option>
     );
   });
 
   const handleSelection = (event) => {
-    chooseBoard(event.target.value);
+    const eventValue = JSON.parse(event.target.value);
+    chooseBoard(eventValue);
   };
 
-  //chooseBoard function needs a single object of board data to process
-  //so whatever function happens on selection of an item from the dropdown menu, we need to pass in
-  //the full data object, not just the name from the menu
   return (
     <div>
       <label htmlFor="boardDropdown">Select a Board</label>

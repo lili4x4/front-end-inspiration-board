@@ -47,11 +47,9 @@ function App() {
   const [chosenBoard, setChosenBoard] = useState(blankBoard);
 
   const chooseBoard = (boardInfo) => {
-    console.log("in chooseBoard");
     const filteredData = boardData.filter((data) => {
       return data.board_id === boardInfo.board_id;
     });
-    // returns list, so to make processing easier, remove object from list
     const board = filteredData[0];
     setChosenBoard(board);
   };
