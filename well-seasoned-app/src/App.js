@@ -23,7 +23,6 @@ const getOneBoard = (boardId) => {
   return axios
     .get(`${kBaseUrl}/boards/${boardId}`)
     .then((response) => {
-      console.log({ getOneBoard: response.data });
       return response.data;
     })
     .catch((err) => {
@@ -41,7 +40,6 @@ const patchCard = (messageData) => {
   return axios
     .patch(`${kBaseUrl}/cards/${messageData.cardId}`, patchRequest)
     .then((response) => {
-      console.log({ patchResponseData: response.data });
       return response.data;
     })
     .catch((err) => {
@@ -74,13 +72,10 @@ function App() {
     });
   };
 
-  //something about the asynchronity is not working here
-  //my getOneBoard function is firing before it has the patch response data
-  //which means its not getting the board info with the updated likes count
   const increaseLikes = (messageData) => {
     console.log({ cardData: messageData });
     patchCard(messageData).then((patchResponse) => {
-      getOneBoard(patchResponse.card.boardId).then((boardResponse) => {
+      getOneBoard(patchResponse.card.board_id).then((boardResponse) => {
         setChosenBoard(boardResponse.board);
       });
     });

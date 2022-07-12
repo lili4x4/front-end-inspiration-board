@@ -29,7 +29,7 @@ const BoardDropdown = ({ boardData, chooseBoard }) => {
         onChange={handleSelection}
       >
         <option disabled selected value>
-          Blank Test Board
+          ---
         </option>
         {dropdownOptions}
       </select>
