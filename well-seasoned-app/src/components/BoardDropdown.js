@@ -33,7 +33,6 @@ const BoardDropdown = ({ boardData, chooseBoard }) => {
         </option>
         {dropdownOptions}
       </select>
-      ;
     </div>
   );
 };
