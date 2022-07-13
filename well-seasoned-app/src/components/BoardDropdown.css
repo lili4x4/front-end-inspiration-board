@@ -1,0 +1,13 @@
+#board-dropdown {
+    display: flex;
+    justify-content: space-between;
+    column-gap: 15px;
+}
+
+#heading {
+    font-size: 25px;
+}
+
+select {
+    font-size: 20px;
+}

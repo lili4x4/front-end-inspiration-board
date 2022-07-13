@@ -114,7 +114,7 @@ function App() {
         <BoardDropdown boardData={boardData} chooseBoard={chooseBoard} />
       </header>
       <main>
-        <NewCardForm />
+        <NewCardForm id="new-card-form" />
         <Board chosenBoardData={chosenBoard} increaseLikes={increaseLikes} />
         <NewBoardForm onBoardDataReady={handleBoardDataReady} />
       </main>

@@ -1,5 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
+import "./BoardDropdown.css";
+import "../App.css";
 
 const BoardDropdown = ({ boardData, chooseBoard }) => {
   const dropdownOptions = boardData.map((board) => {
@@ -21,8 +23,10 @@ const BoardDropdown = ({ boardData, chooseBoard }) => {
   };
 
   return (
-    <div>
-      <label htmlFor="boardDropdown">Select a Board</label>
+    <div id="board-dropdown">
+      <label id="heading" htmlFor="boardDropdown">
+        Select a Board
+      </label>
       <select
         name="boardDropdown"
         id="boardDropdown"
