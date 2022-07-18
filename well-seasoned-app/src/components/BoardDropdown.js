@@ -5,7 +5,6 @@ import "../App.css";
 
 const BoardDropdown = ({ boardData, chooseBoard }) => {
   const dropdownOptions = boardData.map((board) => {
-    // console.log(board);
     return (
       <option
         key={board.board_id}

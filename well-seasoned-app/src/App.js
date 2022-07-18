@@ -59,7 +59,7 @@ const createNewBoardCallback = (boardData) => {
   return axios
     .post(`${kBaseUrl}/boards`, boardData)
     .then((response) => {
-      return response.data;
+      return response.data.board;
     })
     .catch((err) => {
       console.log(err);
@@ -85,7 +85,6 @@ function App() {
   };
 
   const increaseLikes = (messageData) => {
-    console.log({ cardData: messageData });
     patchCard(messageData).then((patchResponse) => {
       getOneBoard(patchResponse.card.board_id).then((boardResponse) => {
         setChosenBoard(boardResponse.board);
@@ -97,8 +96,8 @@ function App() {
     updateBoards();
   }, []);
 
-  const createNewBoard = (boardData) => {
-    createNewBoardCallback(boardData).then((newBoard) => {
+  const createNewBoard = (newBoardData) => {
+    createNewBoardCallback(newBoardData).then((newBoard) => {
       setBoardData((oldData) => [...oldData, newBoard]);
     });
   };

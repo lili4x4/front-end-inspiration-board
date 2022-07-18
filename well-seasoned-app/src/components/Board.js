@@ -12,7 +12,6 @@ const Board = ({ chosenBoardData, increaseLikes }) => {
       return "";
     } else {
       const data = chosenBoardData.cards.map((card) => {
-        // console.log(card);
         return (
           <Card
             key={card.card_id}
