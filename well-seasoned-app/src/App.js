@@ -59,7 +59,7 @@ const createNewBoardCallback = (boardData) => {
   return axios
     .post(`${kBaseUrl}/boards`, boardData)
     .then((response) => {
-      return response.data;
+      return response.data.board;
     })
     .catch((err) => {
       console.log(err);
@@ -97,8 +97,21 @@ function App() {
     });
   };
 
+  const deleteCard = (cardId) => {
+    console.log("Entered deleteCard in App. CardId is " + cardId);
+    axios
+      .delete(`${kBaseUrl}/cards/${cardId}`)
+      .then(() => {
+        getOneBoard(chosenBoard.board_id).then((boardResponse) => {
+          setChosenBoard(boardResponse.board);
+        });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   const increaseLikes = (messageData) => {
-    console.log({ cardData: messageData });
     patchCard(messageData).then((patchResponse) => {
       getOneBoard(patchResponse.card.board_id).then((boardResponse) => {
         setChosenBoard(boardResponse.board);
@@ -110,8 +123,8 @@ function App() {
     updateBoards();
   }, []);
 
-  const createNewBoard = (boardData) => {
-    createNewBoardCallback(boardData).then((newBoard) => {
+  const createNewBoard = (newBoardData) => {
+    createNewBoardCallback(newBoardData).then((newBoard) => {
       setBoardData((oldData) => [...oldData, newBoard]);
     });
   };
@@ -155,7 +168,11 @@ function App() {
           onHandleCardDataReady={handleCardDataReady}
           chosenBoard={chosenBoard}
         />
-        <Board chosenBoardData={chosenBoard} increaseLikes={increaseLikes} />
+        <Board
+          chosenBoardData={chosenBoard}
+          increaseLikes={increaseLikes}
+          deleteCardApp={deleteCard}
+        />
         <NewBoardForm onBoardDataReady={handleBoardDataReady} />
       </main>
     </div>
