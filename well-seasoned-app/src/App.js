@@ -122,7 +122,7 @@ function App() {
 
   return (
     <div>
-      <header>
+      <header id="default">
         <h1>Well-Seasoned</h1>
         <BoardDropdown boardData={boardData} chooseBoard={chooseBoard} />
       </header>
