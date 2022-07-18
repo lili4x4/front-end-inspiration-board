@@ -3,6 +3,7 @@
 }
 
 header {
+  
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -10,14 +11,45 @@ header {
   padding: 0 5vw 0 5vw;
 }
 
-#default {
+#default-header {
   background-color: #bb54ff;
   color: white;
 }
 
-#summer {
-  background-color: #00cd14;
+#summer-header {
+  background-color: #00c732;
   color: white;
+}
+
+#summer-body {
+  background-color: #d8ffe2;
+}
+
+#fall-header {
+  background-color: #c77b00;
+  color: white;
+}
+
+#fall-body {
+  background-color: #ffe796;
+}
+
+#winter-header {
+  background-color: #004b8d;
+  color: white;
+}
+
+#winter-body {
+  background-color: #d3feff;
+}
+
+#spring-header {
+  background-color: #ffff00;
+  color: black;
+}
+
+#spring-body {
+  background-color: #abe6ff;
 }
 
 h1 {
@@ -27,6 +59,8 @@ h1 {
 body {
   background-color: #f6e8ff;
 }
+
+
 
 main {
   display: grid;

@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import "./App.css";
 import BoardDropdown from "./components/BoardDropdown";
 import Board from "./components/Board";
@@ -69,13 +69,42 @@ const createNewBoardCallback = (boardData) => {
 function App() {
   const [boardData, setBoardData] = useState([]);
   const [chosenBoard, setChosenBoard] = useState(blankBoard);
+  const ref = useRef(null);
 
   const chooseBoard = (boardInfo) => {
     const filteredData = boardData.filter((data) => {
       return data.board_id === boardInfo.board_id;
     });
     const board = filteredData[0];
+
     setChosenBoard(board);
+
+    setTheme(boardInfo.title);
+  };
+
+  const setTheme = () => {
+    const themeHeader = ref.current;
+    const themeBody = document.getElementsByTagName("body")[0];
+    console.log("ThemeBody is " + themeBody.current);
+
+    console.log("ThemeHeader is " + themeHeader.current);
+    console.log("chosenBoard.title=" + chosenBoard.title);
+    if (chosenBoard.title === "Summer") {
+      themeHeader.setAttribute("id", "summer-header");
+      themeBody.setAttribute("id", "summer-body");
+    } else if (chosenBoard.title === "Spring") {
+      themeHeader.setAttribute("id", "spring-header");
+      themeBody.setAttribute("id", "spring-body");
+    } else if (chosenBoard.title === "Fall") {
+      themeHeader.setAttribute("id", "fall-header");
+      themeBody.setAttribute("id", "fall-body");
+    } else if (chosenBoard.title === "Winter") {
+      themeHeader.setAttribute("id", "winter-header");
+      themeBody.setAttribute("id", "winter-body");
+    } else {
+      themeHeader.setAttribute("id", "default-header");
+      themeBody.setAttribute("id", "default-body");
+    }
   };
 
   const updateBoards = () => {
@@ -108,6 +137,12 @@ function App() {
 
   useEffect(() => {
     updateBoards();
+
+    const themeHeader = "ref.current";
+    console.log("ThemeHeader is " + themeHeader.current);
+
+    const themeBody = document.getElementsByTagName("body");
+    console.log("ThemeBody is " + themeBody.current);
   }, []);
 
   const createNewBoard = (newBoardData) => {
@@ -120,13 +155,17 @@ function App() {
     createNewBoard(formData);
   };
 
+  // const updateTheme = () => {
+  //   const themeId =
+  // }
+
   return (
     <div>
-      <header id="default">
+      <header id="default-header" ref={ref}>
         <h1>Well-Seasoned</h1>
         <BoardDropdown boardData={boardData} chooseBoard={chooseBoard} />
       </header>
-      <main>
+      <main id="default-body">
         <NewCardForm id="new-card-form" />
         <Board
           chosenBoardData={chosenBoard}
