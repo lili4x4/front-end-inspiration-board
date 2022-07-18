@@ -66,6 +66,19 @@ const createNewBoardCallback = (boardData) => {
     });
 };
 
+// callback function that makes API call to create new card form
+const createNewCardCallback = (cardData, boardID) => {
+  console.log("in API Call!");
+  return axios
+    .post(`${kBaseUrl}/boards/${boardID}/cards`, cardData)
+    .then((response) => {
+      return response.data;
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};
+
 function App() {
   const [boardData, setBoardData] = useState([]);
   const [chosenBoard, setChosenBoard] = useState(blankBoard);
@@ -107,6 +120,29 @@ function App() {
     createNewBoard(formData);
   };
 
+  const createCard = (cardData, boardID) => {
+    createNewCardCallback(cardData, boardID)
+      .then((boardWithNewCard) => {
+        setBoardData((oldData) => {
+          return oldData.map((board) => {
+            if (board.board_id === boardID) {
+              return boardWithNewCard;
+            } else {
+              return board;
+            }
+          });
+        });
+      })
+      .catch((err) => {
+        console.log(err.message);
+      });
+  };
+
+  const handleCardDataReady = (cardData, boardID) => {
+    console.log("In handleCardDataReady");
+    createCard(cardData, boardID);
+  };
+
   return (
     <div>
       <header>
@@ -114,7 +150,11 @@ function App() {
         <BoardDropdown boardData={boardData} chooseBoard={chooseBoard} />
       </header>
       <main>
-        <NewCardForm id="new-card-form" />
+        <NewCardForm
+          id="new-card-form"
+          onHandleCardDataReady={handleCardDataReady}
+          chosenBoard={chosenBoard}
+        />
         <Board chosenBoardData={chosenBoard} increaseLikes={increaseLikes} />
         <NewBoardForm onBoardDataReady={handleBoardDataReady} />
       </main>
