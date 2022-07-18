@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import Card from "./Card";
 import "./Board.css";
 
-const Board = ({ chosenBoardData, increaseLikes }) => {
+const Board = ({ chosenBoardData, increaseLikes, deleteCardApp }) => {
   const boardTitle =
     chosenBoardData !== [] ? chosenBoardData.title : "Placeholder Board Title";
 
@@ -21,6 +21,7 @@ const Board = ({ chosenBoardData, increaseLikes }) => {
             message={card.message}
             likesCount={card.likes_count}
             increaseLikesCard={increaseLikes}
+            deleteCardBoard={deleteCardApp}
           />
         );
       });
