@@ -84,6 +84,20 @@ function App() {
     });
   };
 
+  const deleteCard = (cardId) => {
+    console.log("Entered deleteCard in App. CardId is " + cardId);
+    axios
+      .delete(`${kBaseUrl}/cards/${cardId}`)
+      .then(() => {
+        getOneBoard(chosenBoard.board_id).then((boardResponse) => {
+          setChosenBoard(boardResponse.board);
+        });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   const increaseLikes = (messageData) => {
     patchCard(messageData).then((patchResponse) => {
       getOneBoard(patchResponse.card.board_id).then((boardResponse) => {
@@ -114,7 +128,11 @@ function App() {
       </header>
       <main>
         <NewCardForm id="new-card-form" />
-        <Board chosenBoardData={chosenBoard} increaseLikes={increaseLikes} />
+        <Board
+          chosenBoardData={chosenBoard}
+          increaseLikes={increaseLikes}
+          deleteCardApp={deleteCard}
+        />
         <NewBoardForm onBoardDataReady={handleBoardDataReady} />
       </main>
     </div>
