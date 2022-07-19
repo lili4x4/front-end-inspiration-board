@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import PropTypes from "prop-types";
 import "../App.css";
 import "./NewBoardForm.css";
+import { useNavigate } from "react-router-dom";
 
 const kDefaultFormState = {
   title: "",
@@ -10,6 +11,7 @@ const kDefaultFormState = {
 
 const NewBoardForm = ({ onBoardDataReady }) => {
   const [formData, setFormData] = useState(kDefaultFormState);
+  let navigate = useNavigate();
 
   const handleChange = (event) => {
     const fieldName = event.target.name;
@@ -19,11 +21,12 @@ const NewBoardForm = ({ onBoardDataReady }) => {
     setFormData(newFormData);
   };
 
-  const handleSubmit = (event) => {
+  async function handleSubmit(event) {
     event.preventDefault();
-    onBoardDataReady(formData);
+    await onBoardDataReady(formData);
+    navigate("/");
     setFormData(kDefaultFormState);
-  };
+  }
 
   return (
     <div id="new-board-form">

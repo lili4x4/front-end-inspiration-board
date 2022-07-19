@@ -89,12 +89,15 @@ function App() {
   const ref = useRef(null);
 
   const chooseBoard = (boardInfo) => {
+    console.log(boardInfo);
     const filteredData = boardData.filter((data) => {
       return data.board_id === boardInfo.board_id;
     });
+    console.log(filteredData);
     const board = filteredData[0];
     setTheme(board);
     setChosenBoard(board);
+    console.log(chosenBoard);
   };
 
   const setTheme = (board) => {
@@ -161,9 +164,14 @@ function App() {
   }, []);
 
   const createNewBoard = (newBoardData) => {
-    createNewBoardCallback(newBoardData).then((newBoard) => {
-      setBoardData((oldData) => [...oldData, newBoard]);
-    });
+    createNewBoardCallback(newBoardData)
+      .then((newBoard) => {
+        setBoardData((oldData) => [...oldData, newBoard]);
+        return newBoard;
+      })
+      .then((newBoard) => {
+        chooseBoard(newBoard);
+      });
   };
 
   const handleBoardDataReady = (formData) => {
