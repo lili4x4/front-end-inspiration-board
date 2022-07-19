@@ -5,6 +5,9 @@ import Board from "./components/Board";
 import NewCardForm from "./components/NewCardForm";
 import NewBoardForm from "./components/NewBoardForm";
 import axios from "axios";
+import React from "react";
+import ReactDOM from "react-dom/client";
+import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 
 const kBaseUrl = "https://well-seasoned-app.herokuapp.com";
 
@@ -192,25 +195,37 @@ function App() {
   };
 
   return (
-    <div>
+    <BrowserRouter>
       <header id="default-header" ref={ref}>
         <h1>Well-Seasoned</h1>
         <BoardDropdown boardData={boardData} chooseBoard={chooseBoard} />
+        <Link to="/new-board">Add New Board</Link>
       </header>
       <main id="default-body">
-        <NewCardForm
-          id="new-card-form"
-          onHandleCardDataReady={handleCardDataReady}
-          chosenBoard={chosenBoard}
-        />
-        <Board
-          chosenBoardData={chosenBoard}
-          increaseLikes={increaseLikes}
-          deleteCardApp={deleteCard}
-        />
-        <NewBoardForm onBoardDataReady={handleBoardDataReady} />
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <Board
+                chosenBoardData={chosenBoard}
+                increaseLikes={increaseLikes}
+                deleteCardApp={deleteCard}
+              />
+            }
+          >
+            {/* <NewCardForm
+                id="new-card-form"
+                onHandleCardDataReady={handleCardDataReady}
+                chosenBoard={chosenBoard}
+              /> */}
+          </Route>
+          <Route
+            path="/new-board"
+            element={<NewBoardForm onBoardDataReady={handleBoardDataReady} />}
+          ></Route>
+        </Routes>
       </main>
-    </div>
+    </BrowserRouter>
   );
 }
 
