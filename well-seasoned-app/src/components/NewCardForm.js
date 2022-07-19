@@ -21,8 +21,17 @@ const NewCardForm = ({ chosenBoard, onHandleCardDataReady }) => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    onHandleCardDataReady(formData, chosenBoard.board_id);
-    setFormData(kDefaultFormState);
+    const errorDisplay = document.getElementById("error-message");
+    if (formData.message.length > 40) {
+      errorDisplay.textContent =
+        "Message must contain fewer than 40 characters.";
+    } else if (formData.message.length === 0) {
+      errorDisplay.textContent = "Message cannot be empty.";
+    } else {
+      errorDisplay.textContent = "";
+      onHandleCardDataReady(formData, chosenBoard.board_id);
+      setFormData(kDefaultFormState);
+    }
   };
 
   return (
@@ -36,6 +45,7 @@ const NewCardForm = ({ chosenBoard, onHandleCardDataReady }) => {
           value={formData.message}
           onChange={handleChange}
         ></input>
+        <p id="error-message"></p>
         <input id="submit-button" type="submit" value="Add Card"></input>
       </form>
     </div>

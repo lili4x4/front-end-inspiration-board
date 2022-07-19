@@ -1,3 +1,7 @@
 #new-card-form {
     aspect-ratio: 2/1;
 }
+
+#error-message {
+    color: red;
+}
