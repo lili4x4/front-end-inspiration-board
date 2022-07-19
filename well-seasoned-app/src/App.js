@@ -8,6 +8,7 @@ import axios from "axios";
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
+import MainContent from "./components/MainContent";
 
 const kBaseUrl = "https://well-seasoned-app.herokuapp.com";
 
@@ -214,19 +215,14 @@ function App() {
           <Route
             path="/"
             element={
-              <Board
+              <MainContent
                 chosenBoardData={chosenBoard}
                 increaseLikes={increaseLikes}
                 deleteCardApp={deleteCard}
+                onHandleCardDataReady={handleCardDataReady}
               />
             }
-          >
-            {/* <NewCardForm
-                id="new-card-form"
-                onHandleCardDataReady={handleCardDataReady}
-                chosenBoard={chosenBoard}
-              /> */}
-          </Route>
+          ></Route>
           <Route
             path="/new-board"
             element={<NewBoardForm onBoardDataReady={handleBoardDataReady} />}
