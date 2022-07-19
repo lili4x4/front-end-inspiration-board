@@ -72,7 +72,8 @@ const createNewCardCallback = (cardData, boardID) => {
   return axios
     .post(`${kBaseUrl}/boards/${boardID}/cards`, cardData)
     .then((response) => {
-      return response.data;
+      console.log(response.data.board);
+      return response.data.board;
     })
     .catch((err) => {
       console.log(err);
@@ -145,6 +146,7 @@ function App() {
             }
           });
         });
+        setChosenBoard(boardWithNewCard);
       })
       .catch((err) => {
         console.log(err.message);
