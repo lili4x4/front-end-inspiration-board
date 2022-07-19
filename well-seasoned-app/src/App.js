@@ -76,29 +76,27 @@ function App() {
       return data.board_id === boardInfo.board_id;
     });
     const board = filteredData[0];
-
+    setTheme(board);
     setChosenBoard(board);
-
-    setTheme(boardInfo.title);
   };
 
-  const setTheme = () => {
+  const setTheme = (board) => {
     const themeHeader = ref.current;
     const themeBody = document.getElementsByTagName("body")[0];
     console.log("ThemeBody is " + themeBody.current);
 
     console.log("ThemeHeader is " + themeHeader.current);
     console.log("chosenBoard.title=" + chosenBoard.title);
-    if (chosenBoard.title === "Summer") {
+    if (board.title === "Summer") {
       themeHeader.setAttribute("id", "summer-header");
       themeBody.setAttribute("id", "summer-body");
-    } else if (chosenBoard.title === "Spring") {
+    } else if (board.title === "Spring") {
       themeHeader.setAttribute("id", "spring-header");
       themeBody.setAttribute("id", "spring-body");
-    } else if (chosenBoard.title === "Fall") {
+    } else if (board.title === "Fall") {
       themeHeader.setAttribute("id", "fall-header");
       themeBody.setAttribute("id", "fall-body");
-    } else if (chosenBoard.title === "Winter") {
+    } else if (board.title === "Winter") {
       themeHeader.setAttribute("id", "winter-header");
       themeBody.setAttribute("id", "winter-body");
     } else {
