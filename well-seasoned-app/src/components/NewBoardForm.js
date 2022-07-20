@@ -21,9 +21,15 @@ const NewBoardForm = ({ onBoardDataReady }) => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    const errorDisplay = document.getElementById("errorNoTitle");
+    const errorDisplay = document.getElementById("errorBoard");
     if (formData.title.length === 0) {
-      errorDisplay.textContent = "Message cannot be empty";
+      if (formData.owner.length === 0) {
+        errorDisplay.textContent = "Title and owner fields cannot be blank.";
+      } else {
+        errorDisplay.textContent = "Message cannot be empty.";
+      }
+    } else if (formData.owner.length === 0) {
+      errorDisplay.textContent = "Owner cannot be empty.";
     } else {
       errorDisplay.textContent = "";
       onBoardDataReady(formData);
@@ -49,7 +55,7 @@ const NewBoardForm = ({ onBoardDataReady }) => {
           value={formData.owner}
           onChange={handleChange}
         ></input>
-        <p id="errorNoTitle"></p>
+        <p id="errorBoard"></p>
         <input id="submit-button" type="submit" value="Add Board"></input>
       </form>
     </div>
