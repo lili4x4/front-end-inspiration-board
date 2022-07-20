@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import PropTypes from "prop-types";
 import "../App.css";
 import "./NewBoardForm.css";
@@ -10,6 +11,7 @@ const kDefaultFormState = {
 
 const NewBoardForm = ({ onBoardDataReady }) => {
   const [formData, setFormData] = useState(kDefaultFormState);
+  let navigate = useNavigate();
 
   const handleChange = (event) => {
     const fieldName = event.target.name;
@@ -19,7 +21,7 @@ const NewBoardForm = ({ onBoardDataReady }) => {
     setFormData(newFormData);
   };
 
-  const handleSubmit = (event) => {
+  async function handleSubmit(event) {
     event.preventDefault();
     const errorDisplay = document.getElementById("errorBoard");
     if (formData.title.length === 0) {
@@ -32,10 +34,11 @@ const NewBoardForm = ({ onBoardDataReady }) => {
       errorDisplay.textContent = "Owner cannot be empty.";
     } else {
       errorDisplay.textContent = "";
-      onBoardDataReady(formData);
+      await onBoardDataReady(formData);
+      navigate("/");
       setFormData(kDefaultFormState);
     }
-  };
+  }
 
   return (
     <div id="new-board-form">

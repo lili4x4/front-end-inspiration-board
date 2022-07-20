@@ -1,9 +1,12 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { useNavigate, useLocation } from "react-router-dom";
 import "./BoardDropdown.css";
 import "../App.css";
 
 const BoardDropdown = ({ boardData, chooseBoard }) => {
+  let navigate = useNavigate();
+  let location = useLocation();
   const dropdownOptions = boardData.map((board) => {
     return (
       <option
@@ -19,6 +22,9 @@ const BoardDropdown = ({ boardData, chooseBoard }) => {
   const handleSelection = (event) => {
     const eventValue = JSON.parse(event.target.value);
     chooseBoard(eventValue);
+    if (location.pathname !== "/") {
+      navigate("/");
+    }
   };
 
   return (
@@ -27,13 +33,15 @@ const BoardDropdown = ({ boardData, chooseBoard }) => {
         Select a Board
       </label>
       <select
+        defaultValue=""
         name="boardDropdown"
         id="boardDropdown"
         onChange={handleSelection}
       >
-        <option disabled selected value>
+        <option value="" disabled />
+        {/* <option disabled selected value>
           ---
-        </option>
+        </option> */}
         {dropdownOptions}
       </select>
     </div>
