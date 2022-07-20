@@ -62,4 +62,8 @@ const NewBoardForm = ({ onBoardDataReady }) => {
   );
 };
 
+NewBoardForm.propTypes = {
+  onBoardDataReady: PropTypes.func.isRequired,
+};
+
 export default NewBoardForm;

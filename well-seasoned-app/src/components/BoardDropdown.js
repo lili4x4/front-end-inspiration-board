@@ -40,4 +40,24 @@ const BoardDropdown = ({ boardData, chooseBoard }) => {
   );
 };
 
+const cardObjectShape = {
+  board_id: PropTypes.number,
+  card_id: PropTypes.number,
+  likes_count: PropTypes.number,
+  message: PropTypes.string,
+};
+
+const boardObjectShape = {
+  board_id: PropTypes.number,
+  owner: PropTypes.string,
+  title: PropTypes.string,
+  cards: PropTypes.arrayOf(PropTypes.shape(cardObjectShape)),
+};
+
+BoardDropdown.propTypes = {
+  boardData: PropTypes.arrayOf(PropTypes.shape(boardObjectShape).isRequired)
+    .isRequired,
+  chooseBoard: PropTypes.func.isRequired,
+};
+
 export default BoardDropdown;
