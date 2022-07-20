@@ -22,7 +22,9 @@ const NewCardForm = ({ chosenBoard, onHandleCardDataReady }) => {
   const handleSubmit = (event) => {
     event.preventDefault();
     const errorDisplay = document.getElementById("error-message");
-    if (formData.message.length > 40) {
+    if (chosenBoard.board_id === 0) {
+      errorDisplay.textContent = "You must select a board.";
+    } else if (formData.message.length > 40) {
       errorDisplay.textContent =
         "Message must contain fewer than 40 characters.";
     } else if (formData.message.length === 0) {
