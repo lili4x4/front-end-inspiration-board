@@ -130,39 +130,7 @@ function App() {
         setBoardData(boards);
       })
       .then(() => {
-        let date = new Date();
-        const month = date.getMonth();
-        console.log(month);
-        console.log(boardData);
-        let displayBoard;
-        switch (month) {
-          case 11:
-          case 0:
-          case 1:
-            displayBoard = filterBoardsBySeason(boardData, "Winter");
-            setChosenBoard(displayBoard);
-            break;
-          case 2:
-          case 3:
-          case 4:
-            displayBoard = filterBoardsBySeason(boardData, "Spring");
-            setChosenBoard(displayBoard);
-            break;
-          case 5:
-          case 6:
-          case 7:
-            displayBoard = filterBoardsBySeason(boardData, "Summer");
-            setChosenBoard(displayBoard);
-            break;
-          case 8:
-          case 9:
-          case 10:
-            displayBoard = filterBoardsBySeason(boardData, "Fall");
-            setChosenBoard(displayBoard);
-            break;
-          default:
-            setChosenBoard(blankBoard);
-        }
+        defaultBoardByDate();
       });
   };
 
@@ -195,6 +163,42 @@ function App() {
       }
     }
     return blankBoard;
+  };
+
+  const defaultBoardByDate = () => {
+    let date = new Date();
+    const month = date.getMonth();
+    console.log(month);
+    console.log(boardData);
+    let displayBoard;
+    switch (month) {
+      case 11:
+      case 0:
+      case 1:
+        displayBoard = filterBoardsBySeason(boardData, "Winter");
+        setChosenBoard(displayBoard);
+        break;
+      case 2:
+      case 3:
+      case 4:
+        displayBoard = filterBoardsBySeason(boardData, "Spring");
+        setChosenBoard(displayBoard);
+        break;
+      case 5:
+      case 6:
+      case 7:
+        displayBoard = filterBoardsBySeason(boardData, "Summer");
+        setChosenBoard(displayBoard);
+        break;
+      case 8:
+      case 9:
+      case 10:
+        displayBoard = filterBoardsBySeason(boardData, "Fall");
+        setChosenBoard(displayBoard);
+        break;
+      default:
+        setChosenBoard(blankBoard);
+    }
   };
 
   useEffect(() => {
