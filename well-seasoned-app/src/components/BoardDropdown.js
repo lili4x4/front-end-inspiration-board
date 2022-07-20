@@ -27,13 +27,15 @@ const BoardDropdown = ({ boardData, chooseBoard }) => {
         Select a Board
       </label>
       <select
+        defaultValue=""
         name="boardDropdown"
         id="boardDropdown"
         onChange={handleSelection}
       >
-        <option disabled selected value>
+        <option value="" disabled />
+        {/* <option disabled selected value>
           ---
-        </option>
+        </option> */}
         {dropdownOptions}
       </select>
     </div>
