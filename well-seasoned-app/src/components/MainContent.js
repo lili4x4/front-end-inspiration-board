@@ -25,4 +25,16 @@ const MainContent = ({
   );
 };
 
+MainContent.propTypes = {
+  chosenBoardData: PropTypes.shape({
+    board_id: PropTypes.number.isRequired,
+    owner: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
+    cards: PropTypes.array.isRequired,
+  }).isRequired,
+  increaseLikes: PropTypes.func.isRequired,
+  deleteCardApp: PropTypes.func.isRequired,
+  onHandleCardDataReady: PropTypes.func.isRequired,
+};
+
 export default MainContent;
