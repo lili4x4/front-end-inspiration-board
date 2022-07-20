@@ -38,4 +38,13 @@ const Card = ({
   );
 };
 
+Card.propTypes = {
+  cardId: PropTypes.number,
+  message: PropTypes.string,
+  likesCount: PropTypes.number,
+  boardId: PropTypes.number,
+  increaseLikesCard: PropTypes.func.isRequired,
+  deleteCardBoard: PropTypes.func.isRequired,
+};
+
 export default Card;
