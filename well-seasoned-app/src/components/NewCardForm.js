@@ -60,7 +60,7 @@ NewCardForm.propTypes = {
     owner: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
     cards: PropTypes.array.isRequired,
-  }),
+  }).isRequired,
   onHandleCardDataReady: PropTypes.func.isRequired,
 };
 
