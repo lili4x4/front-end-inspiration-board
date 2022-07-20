@@ -33,17 +33,39 @@ const BoardDropdown = ({ boardData, chooseBoard }) => {
         Select a Board
       </label>
       <select
+        defaultValue=""
         name="boardDropdown"
         id="boardDropdown"
         onChange={handleSelection}
       >
-        <option disabled selected value>
+        <option value="" disabled />
+        {/* <option disabled selected value>
           ---
-        </option>
+        </option> */}
         {dropdownOptions}
       </select>
     </div>
   );
+};
+
+const cardObjectShape = {
+  board_id: PropTypes.number,
+  card_id: PropTypes.number,
+  likes_count: PropTypes.number,
+  message: PropTypes.string,
+};
+
+const boardObjectShape = {
+  board_id: PropTypes.number,
+  owner: PropTypes.string,
+  title: PropTypes.string,
+  cards: PropTypes.arrayOf(PropTypes.shape(cardObjectShape)),
+};
+
+BoardDropdown.propTypes = {
+  boardData: PropTypes.arrayOf(PropTypes.shape(boardObjectShape).isRequired)
+    .isRequired,
+  chooseBoard: PropTypes.func.isRequired,
 };
 
 export default BoardDropdown;

@@ -23,9 +23,21 @@ const NewBoardForm = ({ onBoardDataReady }) => {
 
   async function handleSubmit(event) {
     event.preventDefault();
-    await onBoardDataReady(formData);
-    navigate("/");
-    setFormData(kDefaultFormState);
+    const errorDisplay = document.getElementById("errorBoard");
+    if (formData.title.length === 0) {
+      if (formData.owner.length === 0) {
+        errorDisplay.textContent = "Title and owner fields cannot be blank.";
+      } else {
+        errorDisplay.textContent = "Message cannot be empty.";
+      }
+    } else if (formData.owner.length === 0) {
+      errorDisplay.textContent = "Owner cannot be empty.";
+    } else {
+      errorDisplay.textContent = "";
+      await onBoardDataReady(formData);
+      navigate("/");
+      setFormData(kDefaultFormState);
+    }
   }
 
   return (
@@ -46,10 +58,15 @@ const NewBoardForm = ({ onBoardDataReady }) => {
           value={formData.owner}
           onChange={handleChange}
         ></input>
+        <p id="errorBoard"></p>
         <input id="submit-button" type="submit" value="Add Board"></input>
       </form>
     </div>
   );
+};
+
+NewBoardForm.propTypes = {
+  onBoardDataReady: PropTypes.func.isRequired,
 };
 
 export default NewBoardForm;
