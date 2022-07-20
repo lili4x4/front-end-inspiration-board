@@ -122,117 +122,117 @@ function App() {
           themeBody.setAttribute("id", "default-body");
       }
     }
+  };
 
-    const updateBoards = () => {
-      getBoards().then((boards) => {
-        setBoardData(boards);
-      });
-    };
+  const updateBoards = () => {
+    getBoards().then((boards) => {
+      setBoardData(boards);
+    });
+  };
 
-    const deleteCard = (cardId) => {
-      console.log("Entered deleteCard in App. CardId is " + cardId);
-      axios
-        .delete(`${kBaseUrl}/cards/${cardId}`)
-        .then(() => {
-          getOneBoard(chosenBoard.board_id).then((boardResponse) => {
-            setChosenBoard(boardResponse.board);
-          });
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    };
-
-    const increaseLikes = (messageData) => {
-      patchCard(messageData).then((patchResponse) => {
-        getOneBoard(patchResponse.card.board_id).then((boardResponse) => {
+  const deleteCard = (cardId) => {
+    console.log("Entered deleteCard in App. CardId is " + cardId);
+    axios
+      .delete(`${kBaseUrl}/cards/${cardId}`)
+      .then(() => {
+        getOneBoard(chosenBoard.board_id).then((boardResponse) => {
           setChosenBoard(boardResponse.board);
         });
+      })
+      .catch((err) => {
+        console.log(err);
       });
-    };
-
-    useEffect(() => {
-      updateBoards();
-
-      const themeHeader = "ref.current";
-      // console.log("ThemeHeader is " + themeHeader.current);
-
-      const themeBody = document.getElementsByTagName("body");
-      // console.log("ThemeBody is " + themeBody.current);
-    }, []);
-
-    const createNewBoard = (newBoardData) => {
-      return createNewBoardCallback(newBoardData)
-        .then((newBoard) => {
-          const newData = [...boardData, newBoard];
-          setBoardData(newData);
-          return newBoard;
-        })
-        .then((returnBoard) => {
-          chooseBoard(returnBoard);
-        });
-    };
-
-    const handleBoardDataReady = (formData) => {
-      return createNewBoard(formData);
-    };
-
-    const createCard = (cardData, boardID) => {
-      createNewCardCallback(cardData, boardID)
-        .then((boardWithNewCard) => {
-          setBoardData((oldData) => {
-            return oldData.map((board) => {
-              if (board.board_id === boardID) {
-                return boardWithNewCard;
-              } else {
-                return board;
-              }
-            });
-          });
-          setChosenBoard(boardWithNewCard);
-        })
-        .catch((err) => {
-          console.log(err.message);
-        });
-    };
-
-    const handleCardDataReady = (cardData, boardID) => {
-      createCard(cardData, boardID);
-    };
-
-    setTheme(chosenBoard);
-
-    return (
-      <BrowserRouter>
-        <header id="default-header" ref={ref}>
-          <Link to="/">
-            <h1>Well-Seasoned</h1>
-          </Link>
-          <BoardDropdown boardData={boardData} chooseBoard={chooseBoard} />
-          <Link to="/new-board">Add New Board</Link>
-        </header>
-        <main id="default-body">
-          <Routes>
-            <Route
-              path="/"
-              element={
-                <MainContent
-                  chosenBoardData={chosenBoard}
-                  increaseLikes={increaseLikes}
-                  deleteCardApp={deleteCard}
-                  onHandleCardDataReady={handleCardDataReady}
-                />
-              }
-            ></Route>
-            <Route
-              path="/new-board"
-              element={<NewBoardForm onBoardDataReady={handleBoardDataReady} />}
-            ></Route>
-          </Routes>
-        </main>
-      </BrowserRouter>
-    );
   };
+
+  const increaseLikes = (messageData) => {
+    patchCard(messageData).then((patchResponse) => {
+      getOneBoard(patchResponse.card.board_id).then((boardResponse) => {
+        setChosenBoard(boardResponse.board);
+      });
+    });
+  };
+
+  useEffect(() => {
+    updateBoards();
+
+    const themeHeader = "ref.current";
+    // console.log("ThemeHeader is " + themeHeader.current);
+
+    const themeBody = document.getElementsByTagName("body");
+    // console.log("ThemeBody is " + themeBody.current);
+  }, []);
+
+  const createNewBoard = (newBoardData) => {
+    return createNewBoardCallback(newBoardData)
+      .then((newBoard) => {
+        const newData = [...boardData, newBoard];
+        setBoardData(newData);
+        return newBoard;
+      })
+      .then((returnBoard) => {
+        chooseBoard(returnBoard);
+      });
+  };
+
+  const handleBoardDataReady = (formData) => {
+    return createNewBoard(formData);
+  };
+
+  const createCard = (cardData, boardID) => {
+    createNewCardCallback(cardData, boardID)
+      .then((boardWithNewCard) => {
+        setBoardData((oldData) => {
+          return oldData.map((board) => {
+            if (board.board_id === boardID) {
+              return boardWithNewCard;
+            } else {
+              return board;
+            }
+          });
+        });
+        setChosenBoard(boardWithNewCard);
+      })
+      .catch((err) => {
+        console.log(err.message);
+      });
+  };
+
+  const handleCardDataReady = (cardData, boardID) => {
+    createCard(cardData, boardID);
+  };
+
+  setTheme(chosenBoard);
+
+  return (
+    <BrowserRouter>
+      <header id="default-header" ref={ref}>
+        <Link to="/">
+          <h1>Well-Seasoned</h1>
+        </Link>
+        <BoardDropdown boardData={boardData} chooseBoard={chooseBoard} />
+        <Link to="/new-board">Add New Board</Link>
+      </header>
+      <main id="default-body">
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <MainContent
+                chosenBoardData={chosenBoard}
+                increaseLikes={increaseLikes}
+                deleteCardApp={deleteCard}
+                onHandleCardDataReady={handleCardDataReady}
+              />
+            }
+          ></Route>
+          <Route
+            path="/new-board"
+            element={<NewBoardForm onBoardDataReady={handleBoardDataReady} />}
+          ></Route>
+        </Routes>
+      </main>
+    </BrowserRouter>
+  );
 }
 
 export default App;
