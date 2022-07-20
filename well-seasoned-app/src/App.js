@@ -102,21 +102,26 @@ function App() {
 
     console.log("ThemeHeader is " + themeHeader.current);
     console.log("chosenBoard.title=" + chosenBoard.title);
-    if (board.title === "Summer") {
-      themeHeader.setAttribute("id", "summer-header");
-      themeBody.setAttribute("id", "summer-body");
-    } else if (board.title === "Spring") {
-      themeHeader.setAttribute("id", "spring-header");
-      themeBody.setAttribute("id", "spring-body");
-    } else if (board.title === "Fall") {
-      themeHeader.setAttribute("id", "fall-header");
-      themeBody.setAttribute("id", "fall-body");
-    } else if (board.title === "Winter") {
-      themeHeader.setAttribute("id", "winter-header");
-      themeBody.setAttribute("id", "winter-body");
-    } else {
-      themeHeader.setAttribute("id", "default-header");
-      themeBody.setAttribute("id", "default-body");
+    switch (board.title) {
+      case "Summer":
+        themeHeader.setAttribute("id", "summer-header");
+        themeBody.setAttribute("id", "summer-body");
+        break;
+      case "Spring":
+        themeHeader.setAttribute("id", "spring-header");
+        themeBody.setAttribute("id", "spring-body");
+        break;
+      case "Fall":
+        themeHeader.setAttribute("id", "fall-header");
+        themeBody.setAttribute("id", "fall-body");
+        break;
+      case "Winter":
+        themeHeader.setAttribute("id", "winter-header");
+        themeBody.setAttribute("id", "winter-body");
+        break;
+      default:
+        themeHeader.setAttribute("id", "default-header");
+        themeBody.setAttribute("id", "default-body");
     }
   };
 
