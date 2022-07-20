@@ -125,9 +125,45 @@ function App() {
   };
 
   const updateBoards = () => {
-    getBoards().then((boards) => {
-      setBoardData(boards);
-    });
+    return getBoards()
+      .then((boards) => {
+        setBoardData(boards);
+      })
+      .then(() => {
+        let date = new Date();
+        const month = date.getMonth();
+        console.log(month);
+        console.log(boardData);
+        let displayBoard;
+        switch (month) {
+          case 11:
+          case 0:
+          case 1:
+            displayBoard = filterBoardsBySeason(boardData, "Winter");
+            setChosenBoard(displayBoard);
+            break;
+          case 2:
+          case 3:
+          case 4:
+            displayBoard = filterBoardsBySeason(boardData, "Spring");
+            setChosenBoard(displayBoard);
+            break;
+          case 5:
+          case 6:
+          case 7:
+            displayBoard = filterBoardsBySeason(boardData, "Summer");
+            setChosenBoard(displayBoard);
+            break;
+          case 8:
+          case 9:
+          case 10:
+            displayBoard = filterBoardsBySeason(boardData, "Fall");
+            setChosenBoard(displayBoard);
+            break;
+          default:
+            setChosenBoard(blankBoard);
+        }
+      });
   };
 
   const deleteCard = (cardId) => {
@@ -150,6 +186,15 @@ function App() {
         setChosenBoard(boardResponse.board);
       });
     });
+  };
+
+  const filterBoardsBySeason = (boards, season) => {
+    for (let board of boards) {
+      if (board.title === season) {
+        return board;
+      }
+    }
+    return blankBoard;
   };
 
   useEffect(() => {
@@ -179,7 +224,7 @@ function App() {
   };
 
   const createCard = (cardData, boardID) => {
-    createNewCardCallback(cardData, boardID)
+    return createNewCardCallback(cardData, boardID)
       .then((boardWithNewCard) => {
         setBoardData((oldData) => {
           return oldData.map((board) => {
@@ -198,7 +243,7 @@ function App() {
   };
 
   const handleCardDataReady = (cardData, boardID) => {
-    createCard(cardData, boardID);
+    return createCard(cardData, boardID);
   };
 
   setTheme(chosenBoard);
@@ -209,7 +254,11 @@ function App() {
         <Link to="/">
           <h1>Well-Seasoned</h1>
         </Link>
-        <BoardDropdown boardData={boardData} chooseBoard={chooseBoard} />
+        <BoardDropdown
+          boardData={boardData}
+          chooseBoard={chooseBoard}
+          chosenBoard={chosenBoard}
+        />
         <Link to="/new-board">Add New Board</Link>
       </header>
       <main id="default-body">

@@ -4,19 +4,32 @@ import { useNavigate, useLocation } from "react-router-dom";
 import "./BoardDropdown.css";
 import "../App.css";
 
-const BoardDropdown = ({ boardData, chooseBoard }) => {
+const BoardDropdown = ({ boardData, chooseBoard, chosenBoard }) => {
   let navigate = useNavigate();
   let location = useLocation();
   const dropdownOptions = boardData.map((board) => {
-    return (
-      <option
-        key={board.board_id}
-        id={board.board_id}
-        value={JSON.stringify(board)}
-      >
-        {board.title}
-      </option>
-    );
+    if (board.title === chosenBoard.title) {
+      return (
+        <option
+          key={board.board_id}
+          id={board.board_id}
+          value={JSON.stringify(board)}
+          selected
+        >
+          {board.title}
+        </option>
+      );
+    } else {
+      return (
+        <option
+          key={board.board_id}
+          id={board.board_id}
+          value={JSON.stringify(board)}
+        >
+          {board.title}
+        </option>
+      );
+    }
   });
 
   const handleSelection = (event) => {
