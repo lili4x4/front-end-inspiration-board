@@ -4,7 +4,6 @@ import BoardDropdown from "./components/BoardDropdown";
 import NewBoardForm from "./components/NewBoardForm";
 import axios from "axios";
 import React from "react";
-import ReactDOM from "react-dom/client";
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 import MainContent from "./components/MainContent";
 
@@ -124,14 +123,11 @@ function App() {
     }
   };
 
-  const updateBoards = () => {
-    return getBoards()
-      .then((boards) => {
-        setBoardData(boards);
-      })
-      .then(() => {
-        defaultBoardByDate();
-      });
+  const initializeBoards = () => {
+    return getBoards().then((boards) => {
+      setBoardData(boards);
+      defaultBoardByDate(boards);
+    });
   };
 
   const deleteCard = (cardId) => {
@@ -165,35 +161,33 @@ function App() {
     return blankBoard;
   };
 
-  const defaultBoardByDate = () => {
+  const defaultBoardByDate = (boards) => {
     let date = new Date();
     const month = date.getMonth();
-    console.log(month);
-    console.log(boardData);
     let displayBoard;
     switch (month) {
       case 11:
       case 0:
       case 1:
-        displayBoard = filterBoardsBySeason(boardData, "Winter");
+        displayBoard = filterBoardsBySeason(boards, "Winter");
         setChosenBoard(displayBoard);
         break;
       case 2:
       case 3:
       case 4:
-        displayBoard = filterBoardsBySeason(boardData, "Spring");
+        displayBoard = filterBoardsBySeason(boards, "Spring");
         setChosenBoard(displayBoard);
         break;
       case 5:
       case 6:
       case 7:
-        displayBoard = filterBoardsBySeason(boardData, "Summer");
+        displayBoard = filterBoardsBySeason(boards, "Summer");
         setChosenBoard(displayBoard);
         break;
       case 8:
       case 9:
       case 10:
-        displayBoard = filterBoardsBySeason(boardData, "Fall");
+        displayBoard = filterBoardsBySeason(boards, "Fall");
         setChosenBoard(displayBoard);
         break;
       default:
@@ -202,7 +196,7 @@ function App() {
   };
 
   useEffect(() => {
-    updateBoards();
+    initializeBoards();
 
     const themeHeader = "ref.current";
     // console.log("ThemeHeader is " + themeHeader.current);
