@@ -37,7 +37,7 @@ const NewCardForm = ({ chosenBoard, onHandleCardDataReady }) => {
   };
 
   return (
-    <div className="form" id="new-card-form">
+    <div id="new-card-form">
       <form className="form" onSubmit={handleSubmit}>
         <h3>Add a Card</h3>
         <label>Message</label>
