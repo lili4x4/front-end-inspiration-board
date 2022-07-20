@@ -54,4 +54,14 @@ const NewCardForm = ({ chosenBoard, onHandleCardDataReady }) => {
   );
 };
 
+NewCardForm.propTypes = {
+  chosenBoard: PropTypes.shape({
+    board_id: PropTypes.number,
+    cards: PropTypes.array,
+    title: PropTypes.string,
+    owner: PropTypes.string,
+  }),
+  onHandleCardDataReady: PropTypes.func.isRequired,
+};
+
 export default NewCardForm;

@@ -69,6 +69,7 @@ const createNewBoardCallback = (boardData) => {
 // callback function that makes API call to create new card form
 const createNewCardCallback = (cardData, boardID) => {
   console.log("in API Call!");
+
   return axios
     .post(`${kBaseUrl}/boards/${boardID}/cards`, cardData)
     .then((response) => {
