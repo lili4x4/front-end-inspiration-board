@@ -9,6 +9,6 @@
 .submit-button {
     background-color: rgb(255, 255, 255);
     color: black;
-    font-size: calc(10px + .8vw);
+    font-size: calc(10px + .5vw);
     border-radius: 10px;
 }
