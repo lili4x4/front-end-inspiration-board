@@ -2,6 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import Board from "./Board";
 import NewCardForm from "./NewCardForm";
+import "./MainContent.css";
 
 const MainContent = ({
   chosenBoardData,
@@ -11,17 +12,16 @@ const MainContent = ({
   deleteBoardApp,
 }) => {
   return (
-    <div>
-      <Board
-        chosenBoardData={chosenBoardData}
-        increaseLikes={increaseLikes}
-        deleteCardApp={deleteCardApp}
-        onDeleteBoard={deleteBoardApp}
-      />
+    <div id="all-MainContent">
       <NewCardForm
         id="new-card-form"
         onHandleCardDataReady={onHandleCardDataReady}
         chosenBoard={chosenBoardData}
+      />
+      <Board
+        chosenBoardData={chosenBoardData}
+        increaseLikes={increaseLikes}
+        deleteCardApp={deleteCardApp}
       />
     </div>
   );

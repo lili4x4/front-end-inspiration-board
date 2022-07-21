@@ -18,17 +18,15 @@ const Board = ({
     } else {
       const data = chosenBoardData.cards.map((card) => {
         return (
-          <div>
-            <Card
-              key={card.card_id}
-              cardId={card.card_id}
-              boardId={card.board_id}
-              message={card.message}
-              likesCount={card.likes_count}
-              increaseLikesCard={increaseLikes}
-              deleteCardBoard={deleteCardApp}
-            />
-          </div>
+          <Card
+            key={card.card_id}
+            cardId={card.card_id}
+            boardId={card.board_id}
+            message={card.message}
+            likesCount={card.likes_count}
+            increaseLikesCard={increaseLikes}
+            deleteCardBoard={deleteCardApp}
+          />
         );
       });
       return data;

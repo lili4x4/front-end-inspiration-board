@@ -23,7 +23,7 @@ const Card = ({
   };
 
   return (
-    <li>
+    <li className="one-card">
       <p id="message">{message}</p>
       <div id="below-message">
         <div id="likes-and-heart">
