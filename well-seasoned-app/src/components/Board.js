@@ -41,10 +41,20 @@ const Board = ({
       <ul>{messages}</ul>
       <button
         id="delete"
-        onClick={() => onDeleteBoard(chosenBoardData.board_id)}
+        onClick={() => {
+          const protectedBoardIds = [0, 2, 3, 4, 5];
+          const errorDisplay = document.getElementById("error-message-board");
+          if (protectedBoardIds.includes(chosenBoardData.board_id)) {
+            errorDisplay.textContent = "Protected boards cannot be deleted.";
+          } else {
+            errorDisplay.textContent = "";
+            onDeleteBoard(chosenBoardData.board_id);
+          }
+        }}
       >
         Delete Board
       </button>
+      <p id="error-message-board"></p>
     </div>
   );
 };
