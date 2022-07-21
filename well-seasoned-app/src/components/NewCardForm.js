@@ -11,7 +11,6 @@ const NewCardForm = ({ chosenBoard, onHandleCardDataReady }) => {
   const [formData, setFormData] = useState(kDefaultFormState);
 
   const handleChange = (event) => {
-    console.log(event.target.value);
     const fieldName = event.target.name;
     const fieldValue = event.target.value;
 
@@ -56,11 +55,11 @@ const NewCardForm = ({ chosenBoard, onHandleCardDataReady }) => {
 
 NewCardForm.propTypes = {
   chosenBoard: PropTypes.shape({
-    board_id: PropTypes.number,
-    cards: PropTypes.array,
-    title: PropTypes.string,
-    owner: PropTypes.string,
-  }),
+    board_id: PropTypes.number.isRequired,
+    owner: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
+    cards: PropTypes.array.isRequired,
+  }).isRequired,
   onHandleCardDataReady: PropTypes.func.isRequired,
 };
 
