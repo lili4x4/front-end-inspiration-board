@@ -11,7 +11,6 @@ const NewCardForm = ({ chosenBoard, onHandleCardDataReady }) => {
   const [formData, setFormData] = useState(kDefaultFormState);
 
   const handleChange = (event) => {
-    console.log(event.target.value);
     const fieldName = event.target.name;
     const fieldValue = event.target.value;
 

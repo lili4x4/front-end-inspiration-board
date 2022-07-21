@@ -4,7 +4,6 @@ import BoardDropdown from "./components/BoardDropdown";
 import NewBoardForm from "./components/NewBoardForm";
 import axios from "axios";
 import React from "react";
-import ReactDOM from "react-dom/client";
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 import MainContent from "./components/MainContent";
 
@@ -70,12 +69,9 @@ const createNewBoardCallback = (boardData) => {
 
 // callback function that makes API call to create new card form
 const createNewCardCallback = (cardData, boardID) => {
-  console.log("in API Call!");
-
   return axios
     .post(`${kBaseUrl}/boards/${boardID}/cards`, cardData)
     .then((response) => {
-      console.log(response.data.board);
       return response.data.board;
     })
     .catch((err) => {
@@ -96,10 +92,7 @@ function App() {
     if (board.board_id !== 0) {
       const themeHeader = ref.current;
       const themeBody = document.getElementsByTagName("body")[0];
-      // console.log("ThemeBody is " + themeBody.current);
 
-      console.log("ThemeHeader is " + themeHeader.current);
-      console.log("chosenBoard.title=" + chosenBoard.title);
       switch (board.title) {
         case "Summer":
           themeHeader.setAttribute("id", "summer-header");
@@ -131,7 +124,6 @@ function App() {
   };
 
   const deleteCard = (cardId) => {
-    console.log("Entered deleteCard in App. CardId is " + cardId);
     axios
       .delete(`${kBaseUrl}/cards/${cardId}`)
       .then(() => {
@@ -154,12 +146,6 @@ function App() {
 
   useEffect(() => {
     updateBoards();
-
-    const themeHeader = "ref.current";
-    // console.log("ThemeHeader is " + themeHeader.current);
-
-    const themeBody = document.getElementsByTagName("body");
-    // console.log("ThemeBody is " + themeBody.current);
   }, []);
 
   const createNewBoard = (newBoardData) => {
@@ -193,7 +179,7 @@ function App() {
         setChosenBoard(boardWithNewCard);
       })
       .catch((err) => {
-        console.log(err.message);
+        console.log(err);
       });
   };
 

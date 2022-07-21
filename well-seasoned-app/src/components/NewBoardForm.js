@@ -11,7 +11,7 @@ const kDefaultFormState = {
 
 const NewBoardForm = ({ onBoardDataReady }) => {
   const [formData, setFormData] = useState(kDefaultFormState);
-  let navigate = useNavigate();
+  const navigate = useNavigate();
 
   const handleChange = (event) => {
     const fieldName = event.target.name;

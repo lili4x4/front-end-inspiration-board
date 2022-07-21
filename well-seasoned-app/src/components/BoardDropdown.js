@@ -5,8 +5,8 @@ import "./BoardDropdown.css";
 import "../App.css";
 
 const BoardDropdown = ({ boardData, chooseBoard }) => {
-  let navigate = useNavigate();
-  let location = useLocation();
+  const navigate = useNavigate();
+  const location = useLocation();
   const dropdownOptions = boardData.map((board) => {
     return (
       <option
@@ -39,9 +39,6 @@ const BoardDropdown = ({ boardData, chooseBoard }) => {
         onChange={handleSelection}
       >
         <option value="" disabled />
-        {/* <option disabled selected value>
-          ---
-        </option> */}
         {dropdownOptions}
       </select>
     </div>

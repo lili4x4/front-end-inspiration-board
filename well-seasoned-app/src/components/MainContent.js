@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import PropTypes from "prop-types";
 import Board from "./Board";
 import NewCardForm from "./NewCardForm";
@@ -7,7 +7,7 @@ const MainContent = ({
   chosenBoardData,
   increaseLikes,
   deleteCardApp,
-  handleCardDataReady,
+  onHandleCardDataReady,
 }) => {
   return (
     <div>
@@ -18,7 +18,7 @@ const MainContent = ({
       />
       <NewCardForm
         id="new-card-form"
-        onHandleCardDataReady={handleCardDataReady}
+        onHandleCardDataReady={onHandleCardDataReady}
         chosenBoard={chosenBoardData}
       />
     </div>
