@@ -137,6 +137,18 @@ function App() {
       });
   };
 
+  const deleteBoard = (boardId) => {
+    axios
+      .delete(`${kBaseUrl}/boards/${boardId}`)
+      .then(() => {
+        getOneBoard(chosenBoard.board_id);
+        setChosenBoard(blankBoard);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   const increaseLikes = (messageData) => {
     patchCard(messageData).then((patchResponse) => {
       getOneBoard(patchResponse.card.board_id).then((boardResponse) => {
@@ -256,6 +268,7 @@ function App() {
                 increaseLikes={increaseLikes}
                 deleteCardApp={deleteCard}
                 onHandleCardDataReady={handleCardDataReady}
+                deleteBoardApp={deleteBoard}
               />
             }
           ></Route>

@@ -3,7 +3,12 @@ import PropTypes from "prop-types";
 import Card from "./Card";
 import "./Board.css";
 
-const Board = ({ chosenBoardData, increaseLikes, deleteCardApp }) => {
+const Board = ({
+  chosenBoardData,
+  increaseLikes,
+  deleteCardApp,
+  onDeleteBoard,
+}) => {
   const boardTitle =
     chosenBoardData !== [] ? chosenBoardData.title : "Placeholder Board Title";
 
@@ -13,15 +18,17 @@ const Board = ({ chosenBoardData, increaseLikes, deleteCardApp }) => {
     } else {
       const data = chosenBoardData.cards.map((card) => {
         return (
-          <Card
-            key={card.card_id}
-            cardId={card.card_id}
-            boardId={card.board_id}
-            message={card.message}
-            likesCount={card.likes_count}
-            increaseLikesCard={increaseLikes}
-            deleteCardBoard={deleteCardApp}
-          />
+          <div>
+            <Card
+              key={card.card_id}
+              cardId={card.card_id}
+              boardId={card.board_id}
+              message={card.message}
+              likesCount={card.likes_count}
+              increaseLikesCard={increaseLikes}
+              deleteCardBoard={deleteCardApp}
+            />
+          </div>
         );
       });
       return data;
@@ -34,6 +41,12 @@ const Board = ({ chosenBoardData, increaseLikes, deleteCardApp }) => {
     <div>
       <h2>{boardTitle}</h2>
       <ul>{messages}</ul>
+      <button
+        id="delete"
+        onClick={() => onDeleteBoard(chosenBoardData.board_id)}
+      >
+        Delete Board
+      </button>
     </div>
   );
 };
@@ -53,6 +66,7 @@ Board.propTypes = {
     title: PropTypes.string,
     cards: PropTypes.arrayOf(PropTypes.shape(cardObjectShape)),
   }).isRequired,
+  onDeleteBoard: PropTypes.func.isRequired,
 };
 
 export default Board;
