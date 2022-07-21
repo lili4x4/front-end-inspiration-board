@@ -47,7 +47,7 @@ const NewCardForm = ({ chosenBoard, onHandleCardDataReady }) => {
           onChange={handleChange}
         ></input>
         <p id="error-message"></p>
-        <input id="submit-button" type="submit" value="Add Card"></input>
+        <input className="submit-button" type="submit" value="Add Card"></input>
       </form>
     </div>
   );
