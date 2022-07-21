@@ -9,6 +9,7 @@ const MainContent = ({
   increaseLikes,
   deleteCardApp,
   onHandleCardDataReady,
+  deleteBoardApp,
 }) => {
   return (
     <div id="all-MainContent">
@@ -36,6 +37,7 @@ MainContent.propTypes = {
   increaseLikes: PropTypes.func.isRequired,
   deleteCardApp: PropTypes.func.isRequired,
   onHandleCardDataReady: PropTypes.func.isRequired,
+  deleteBoardApp: PropTypes.func.isRequired,
 };
 
 export default MainContent;
