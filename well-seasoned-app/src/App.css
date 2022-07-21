@@ -16,6 +16,25 @@ header {
   color: white;
 }
 
+h1 {
+  color: white;
+  font-size: calc(10pt + 1.5vw);
+}
+
+a {
+  text-decoration: none;
+}
+
+
+#add-new-board {
+  color: #393939;
+  font-size: calc(8pt + .5vw);
+  background-color: #e5e5e5;
+  border: solid #636363 3px;
+  border-radius: 5vw;
+  padding: .5vw 1vw .5vw 1vw;
+}
+
 #summer-header {
   background-color: #00c732;
   color: white;

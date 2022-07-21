@@ -255,7 +255,9 @@ function App() {
           chooseBoard={chooseBoard}
           chosenBoard={chosenBoard}
         />
-        <Link to="/new-board">Add New Board</Link>
+        <Link id="add-new-board" to="/new-board">
+          Add New Board
+        </Link>
       </header>
       <main id="default-body">
         <Routes>
