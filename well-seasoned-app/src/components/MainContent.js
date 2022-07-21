@@ -11,6 +11,17 @@ const MainContent = ({
   onHandleCardDataReady,
   deleteBoardApp,
 }) => {
+  const deleteBoardSafely = () => {
+    const protectedBoardIds = [2, 3, 4, 5];
+    const errorDisplay = document.getElementById("error-message-board");
+    if (protectedBoardIds.includes(chosenBoardData.board_id)) {
+      errorDisplay.textContent = "Protected boards cannot be deleted.";
+    } else {
+      errorDisplay.textContent = "";
+      deleteBoardApp(chosenBoardData.board_id);
+    }
+  };
+
   return (
     <div id="all-MainContent">
       <NewCardForm
@@ -22,8 +33,13 @@ const MainContent = ({
         chosenBoardData={chosenBoardData}
         increaseLikes={increaseLikes}
         deleteCardApp={deleteCardApp}
-        onDeleteBoard={deleteBoardApp}
       />
+      <div>
+        <button className="delete-board" onClick={deleteBoardSafely}>
+          Delete Board
+        </button>
+        <p id="error-message-board"></p>
+      </div>
     </div>
   );
 };

@@ -10,6 +10,7 @@ li {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    aspect-ratio: 1;
 }
 
 #below-message {
