@@ -3,12 +3,7 @@ import PropTypes from "prop-types";
 import Card from "./Card";
 import "./Board.css";
 
-const Board = ({
-  chosenBoardData,
-  increaseLikes,
-  deleteCardApp,
-  onDeleteBoard,
-}) => {
+const Board = ({ chosenBoardData, increaseLikes, deleteCardApp }) => {
   const boardTitle =
     chosenBoardData !== [] ? chosenBoardData.title : "Placeholder Board Title";
 
@@ -58,7 +53,6 @@ Board.propTypes = {
     title: PropTypes.string,
     cards: PropTypes.arrayOf(PropTypes.shape(cardObjectShape)),
   }).isRequired,
-  onDeleteBoard: PropTypes.func.isRequired,
 };
 
 export default Board;
