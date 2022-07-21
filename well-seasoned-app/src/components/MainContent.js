@@ -22,6 +22,7 @@ const MainContent = ({
         chosenBoardData={chosenBoardData}
         increaseLikes={increaseLikes}
         deleteCardApp={deleteCardApp}
+        onDeleteBoard={deleteBoardApp}
       />
     </div>
   );
