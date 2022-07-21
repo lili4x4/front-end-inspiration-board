@@ -60,28 +60,21 @@ body {
   background-color: #f6e8ff;
 }
 
-
-
-main {
-  display: grid;
-  grid-template-columns: 1fr 3fr 1fr;
-}
-
 .form {
   margin-top: 3vw;
   display: flex;
   flex-direction: column;
   align-items:center;
-  background-color: #78e6ff;
-  border: solid #0095ff 5px;
+  background-color: #e5e5e5;
+  border: solid #636363 5px;
   border-radius: 30px;
   padding-bottom: 15px;
 }
 
 .form h3 {
   color: white;
-  background-color: #3fafff;
-  border: solid #0095ff 2px;
+  background-color: #757575;
+  border: solid #5c5c5c 2px;
   border-radius: 30px;
   padding: 5px 10px 5px 10px;
 }

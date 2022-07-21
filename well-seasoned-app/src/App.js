@@ -252,6 +252,7 @@ function App() {
             path="/"
             element={
               <MainContent
+                id="MainContent"
                 chosenBoardData={chosenBoard}
                 increaseLikes={increaseLikes}
                 deleteCardApp={deleteCard}

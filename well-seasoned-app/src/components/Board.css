@@ -4,7 +4,6 @@ h2 {
 }
 
 ul {
-    /* background-color: pink; */
     aspect-ratio: 1;
     margin-left: 5vw;
     margin-right: 5vw;
@@ -13,8 +12,4 @@ ul {
     /* grid-template-rows: 1fr 1fr 1fr; */
     column-gap: 3vw;
     row-gap: 3vw;
-}
-
-Card {
-    background-color: pink;
 }
