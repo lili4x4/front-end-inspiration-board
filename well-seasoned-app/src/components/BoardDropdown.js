@@ -4,15 +4,9 @@ import { useNavigate, useLocation } from "react-router-dom";
 import "./BoardDropdown.css";
 import "../App.css";
 
-<<<<<<< HEAD
 const BoardDropdown = ({ boardData, chooseBoard, chosenBoard }) => {
-  let navigate = useNavigate();
-  let location = useLocation();
-=======
-const BoardDropdown = ({ boardData, chooseBoard }) => {
   const navigate = useNavigate();
   const location = useLocation();
->>>>>>> main
   const dropdownOptions = boardData.map((board) => {
     if (board.title === chosenBoard.title) {
       return (
