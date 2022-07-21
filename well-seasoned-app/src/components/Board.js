@@ -44,7 +44,7 @@ const Board = ({
       <button
         id="delete"
         onClick={() => {
-          const protectedBoardIds = [0, 2, 3, 4, 5];
+          const protectedBoardIds = [2, 3, 4, 5];
           const errorDisplay = document.getElementById("error-message-board");
           if (protectedBoardIds.includes(chosenBoardData.board_id)) {
             errorDisplay.textContent = "Protected boards cannot be deleted.";

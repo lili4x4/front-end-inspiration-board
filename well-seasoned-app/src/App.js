@@ -141,8 +141,7 @@ function App() {
     axios
       .delete(`${kBaseUrl}/boards/${boardId}`)
       .then(() => {
-        getOneBoard(chosenBoard.board_id);
-        setChosenBoard(blankBoard);
+        initializeBoards();
       })
       .catch((err) => {
         console.log(err);
