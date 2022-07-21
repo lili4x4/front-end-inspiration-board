@@ -63,6 +63,9 @@ a {
 
 #spring-header {
   background-color: #ffff00;
+}
+
+#spring-header h1 {
   color: black;
 }
 
@@ -87,6 +90,8 @@ body {
   border: solid #636363 5px;
   border-radius: 30px;
   padding-bottom: 15px;
+  padding-left: 1vw;
+  padding-right: 1vw;
 }
 
 .form h3 {
@@ -98,7 +103,8 @@ body {
 }
 
 #new-board-form {
-  margin-right: 4vw;
+  width: 20vw;
+  margin: auto;
 }
 
 #new-card-form {

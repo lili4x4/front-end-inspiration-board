@@ -1,6 +1,6 @@
 #message {
     font-family: 'Grape Nuts', cursive;
-    font-size: 25px;
+    font-size: calc(10px + 1.2vw);
 }   
 
 li {
@@ -10,7 +10,6 @@ li {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    aspect-ratio: 1;
 }
 
 #below-message {
