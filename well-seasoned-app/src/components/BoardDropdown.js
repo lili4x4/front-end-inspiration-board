@@ -5,13 +5,8 @@ import "./BoardDropdown.css";
 import "../App.css";
 
 const BoardDropdown = ({ boardData, chooseBoard, chosenBoard }) => {
-<<<<<<< HEAD
   const navigate = useNavigate();
   const location = useLocation();
-=======
-  let navigate = useNavigate();
-  let location = useLocation();
->>>>>>> e9dd512a769790ecf88e2dc66af3620506dff8ab
   const dropdownOptions = boardData.map((board) => {
     if (board.title === chosenBoard.title) {
       return (
@@ -81,6 +76,7 @@ BoardDropdown.propTypes = {
   boardData: PropTypes.arrayOf(PropTypes.shape(boardObjectShape).isRequired)
     .isRequired,
   chooseBoard: PropTypes.func.isRequired,
+  chosenBoard: PropTypes.shape(boardObjectShape).isRequired,
 };
 
 export default BoardDropdown;
