@@ -1,14 +1,15 @@
 import { useState, useEffect, useRef } from "react";
-import "./App.css";
-import BoardDropdown from "./components/BoardDropdown";
-import NewBoardForm from "./components/NewBoardForm";
 import axios from "axios";
 import React from "react";
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
+import BoardDropdown from "./components/BoardDropdown";
+import NewBoardForm from "./components/NewBoardForm";
 import MainContent from "./components/MainContent";
+import "./App.css";
 
 const kBaseUrl = "https://well-seasoned-app.herokuapp.com";
 
+// Callback function that makes API call to get all boards from database
 const getBoards = () => {
   return axios
     .get(`${kBaseUrl}/boards`)
@@ -20,6 +21,7 @@ const getBoards = () => {
     });
 };
 
+// Callback function that makes API call to get specific board from database
 const getOneBoard = (boardId) => {
   return axios
     .get(`${kBaseUrl}/boards/${boardId}`)
@@ -31,6 +33,7 @@ const getOneBoard = (boardId) => {
     });
 };
 
+// Callback function that makes API call to update card in database
 const patchCard = (messageData) => {
   const patchRequest = {
     card_id: messageData.cardId,
@@ -46,13 +49,6 @@ const patchCard = (messageData) => {
     .catch((err) => {
       console.log(err);
     });
-};
-
-const blankBoard = {
-  board_id: 0,
-  owner: "",
-  title: "",
-  cards: [],
 };
 
 // Callback function that makes API call to create new board
@@ -79,14 +75,22 @@ const createNewCardCallback = (cardData, boardID) => {
     });
 };
 
+// Initial chosen board state
+const blankBoard = {
+  board_id: 0,
+  owner: "",
+  title: "",
+  cards: [],
+};
+
 function App() {
   const [boardData, setBoardData] = useState([]);
   const [chosenBoard, setChosenBoard] = useState(blankBoard);
   const ref = useRef(null);
 
-  const chooseBoard = (boardInfo) => {
-    setChosenBoard(boardInfo);
-  };
+  useEffect(() => {
+    updateBoards();
+  }, []);
 
   const setTheme = (board) => {
     if (board.board_id !== 0) {
@@ -117,11 +121,15 @@ function App() {
     }
   };
 
-  const initializeBoards = () => {
+  const updateBoards = () => {
     return getBoards().then((boards) => {
       setBoardData(boards);
       defaultBoardByDate(boards);
     });
+  };
+
+  const chooseBoard = (boardInfo) => {
+    setChosenBoard(boardInfo);
   };
 
   const deleteCard = (cardId) => {
@@ -129,7 +137,7 @@ function App() {
       .delete(`${kBaseUrl}/cards/${cardId}`)
       .then(() => {
         getOneBoard(chosenBoard.board_id).then((boardResponse) => {
-          setChosenBoard(boardResponse.board);
+          chooseBoard(boardResponse.board);
         });
       })
       .catch((err) => {
@@ -141,7 +149,7 @@ function App() {
     axios
       .delete(`${kBaseUrl}/boards/${boardId}`)
       .then(() => {
-        initializeBoards();
+        updateBoards();
       })
       .catch((err) => {
         console.log(err);
@@ -151,7 +159,7 @@ function App() {
   const increaseLikes = (messageData) => {
     patchCard(messageData).then((patchResponse) => {
       getOneBoard(patchResponse.card.board_id).then((boardResponse) => {
-        setChosenBoard(boardResponse.board);
+        chooseBoard(boardResponse.board);
       });
     });
   };
@@ -166,7 +174,7 @@ function App() {
   };
 
   const defaultBoardByDate = (boards) => {
-    let date = new Date();
+    const date = new Date();
     const month = date.getMonth();
     let displayBoard;
     switch (month) {
@@ -174,34 +182,30 @@ function App() {
       case 0:
       case 1:
         displayBoard = filterBoardsBySeason(boards, "Winter");
-        setChosenBoard(displayBoard);
+        chooseBoard(displayBoard);
         break;
       case 2:
       case 3:
       case 4:
         displayBoard = filterBoardsBySeason(boards, "Spring");
-        setChosenBoard(displayBoard);
+        chooseBoard(displayBoard);
         break;
       case 5:
       case 6:
       case 7:
         displayBoard = filterBoardsBySeason(boards, "Summer");
-        setChosenBoard(displayBoard);
+        chooseBoard(displayBoard);
         break;
       case 8:
       case 9:
       case 10:
         displayBoard = filterBoardsBySeason(boards, "Fall");
-        setChosenBoard(displayBoard);
+        chooseBoard(displayBoard);
         break;
       default:
-        setChosenBoard(blankBoard);
+        chooseBoard(blankBoard);
     }
   };
-
-  useEffect(() => {
-    initializeBoards();
-  }, []);
 
   const createNewBoard = (newBoardData) => {
     return createNewBoardCallback(newBoardData)
@@ -231,7 +235,7 @@ function App() {
             }
           });
         });
-        setChosenBoard(boardWithNewCard);
+        chooseBoard(boardWithNewCard);
       })
       .catch((err) => {
         console.log(err);
