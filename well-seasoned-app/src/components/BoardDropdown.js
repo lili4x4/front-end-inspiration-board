@@ -14,6 +14,7 @@ const BoardDropdown = ({ boardData, chooseBoard, chosenBoard }) => {
           key={board.board_id}
           id={board.board_id}
           value={JSON.stringify(board)}
+          selected
         >
           {board.title}
         </option>
