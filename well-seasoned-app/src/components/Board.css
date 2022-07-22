@@ -13,9 +13,10 @@ ul {
     margin-left: 5vw;
     margin-right: 5vw;
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template: 1fr / 1fr 1fr 1fr;
     column-gap: 3vw;
     row-gap: 3vw;
+    width: 50vw;
 }
 
 
