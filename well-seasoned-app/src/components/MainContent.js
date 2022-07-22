@@ -1,4 +1,5 @@
 import React from "react";
+import { useEffect } from "react";
 import PropTypes from "prop-types";
 import Board from "./Board";
 import NewCardForm from "./NewCardForm";
@@ -11,6 +12,10 @@ const MainContent = ({
   onHandleCardDataReady,
   deleteBoardApp,
 }) => {
+  useEffect(() => {
+    errorDisplayReset();
+  }, [chosenBoardData]);
+
   const deleteBoardSafely = () => {
     const protectedBoardIds = [2, 3, 4, 5];
     const errorDisplay = document.getElementById("error-message-board");
@@ -20,6 +25,11 @@ const MainContent = ({
       errorDisplay.textContent = "";
       deleteBoardApp(chosenBoardData.board_id);
     }
+  };
+
+  const errorDisplayReset = () => {
+    const errorDisplay = document.getElementById("error-message-board");
+    errorDisplay.textContent = "";
   };
 
   return (
