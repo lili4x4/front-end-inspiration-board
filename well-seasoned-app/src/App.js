@@ -7,7 +7,7 @@ import NewBoardForm from "./components/NewBoardForm";
 import MainContent from "./components/MainContent";
 import "./App.css";
 
-const kBaseUrl = "https://well-seasoned-app.herokuapp.com";
+const kBaseUrl = "https://inspiration-board-backend-t7cg.onrender.com";
 
 // Callback function that makes API call to get all boards from database
 const getBoards = () => {
